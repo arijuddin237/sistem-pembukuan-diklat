@@ -1,0 +1,278 @@
+<?php
+session_start();
+include "cek_session.php";
+?>
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script language="javaScript" >
+function cetak(){
+var bulan=document.getElementById("id_diklat").value;
+var tahun=document.getElementById("nama_diklat").value;
+open("laporan.php?id_diklat="+id_diklat+"&nama_diklat="+nama_diklat,"_blank");
+}
+</script>
+<?php include "koneksi.php";
+$tanggal=$_POST["tanggal"];
+$bulan=$_POST["bulan"];
+$tahun=$_POST["tahun"];
+$id_diklat=$_POST["id_diklat"];
+$nama_diklat=$_POST["nama_diklat"];
+$perintah="SELECT DAY(tanggal_mulai),MONTH(tanggal_mulai),YEAR(tanggal_mulai),unit_pelaksana,jadwal,modul,keperluan_peserta,ruang,instruktur from checklist where nama_diklat='$nama_diklat'";
+$hasil=mysql_query($perintah);
+$row=mysql_fetch_array($hasil);
+?>
+<style type="text/css">
+<!--
+.style1 {
+	font-size: 24px;
+	font-weight: bold;
+}
+.style3 {font-size: 14px}
+-->
+</style>
+</head>
+
+<body>
+<div align="center">
+  <p>&nbsp;</p>
+  <p class="style1">CEKLIST PERSIAPAN SARANA DAN PRASARANA  </p>
+  <div align="left" class="style3"></div>
+</div>
+<table width="538" border="0" cellpadding="0" cellspacing="0">
+  <!--DWLayoutTable-->
+  <tr> 
+    <td width="77" height="4"></td>
+    <td colspan="4" rowspan="2" valign="top"><p>ID Diklat</p></td>
+    <td width="88"></td>
+    <td width="28"></td>
+    <td width="55"></td>
+    <td width="33"></td>
+    <td width="64"></td>
+    <td width="51"></td>
+  </tr>
+  <tr>
+    <td height="19"></td>
+    <td></td>
+    <td></td>
+    <td colspan="4" valign="top">: <?php echo $id_diklat; ?> </td>
+  </tr>
+  
+  
+  <tr>
+    <td height="24">&nbsp;</td>
+    <td colspan="4" valign="top">Nama Diklat</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td colspan="4" valign="top">: <?php echo $nama_diklat; ?></td>
+  </tr>
+  <tr>
+    <td height="26">&nbsp;</td>
+    <td colspan="4" valign="top">Unit Pelaksana</td>
+    <td></td>
+    <td></td>
+    <td colspan="4" valign="top">: <?php echo $row[3]; ?></td>
+  </tr>
+  <tr>
+    <td height="30">&nbsp;</td>
+    <td colspan="4" valign="top">Waktu Pelaksana</td>
+    <td></td>
+    <td></td>
+    <td colspan="4" valign="top">: <?php echo $row[0];echo -$row[1]; echo -$row[2]; ?></td>
+  </tr>
+  <tr>
+    <td height="56">&nbsp;</td>
+    <td width="44"></td>
+    <td width="34"></td>
+    <td width="48"></td>
+    <td width="16"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td height="19">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td rowspan="2" valign="top"><div align="center">No.</div></td>
+    <td colspan="6" rowspan="2" valign="top"><div align="center">URAIAN</div></td>
+    <td colspan="2" valign="top"><div align="center">Kesiapan</div></td>
+  </tr>
+  <tr>
+    <td height="19">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td valign="top"><div align="center">Siap</div></td>
+    <td valign="top"><div align="center">Belum</div></td>
+  </tr>
+  
+  
+  <tr>
+    <td height="23">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td valign="top"><div align="center">1.</div></td>
+    <td colspan="6" valign="top"><div align="center">Jadwal</div></td>
+    <td valign="top"> 
+      <div align="center">
+        <?php
+	  if($row[4]=="1")
+		echo "<input name=\"jadwal\" type=\"checkbox\" value=\"1\" checked disabled>";
+	  else
+		echo "<input name=\"jadwal\" type=\"checkbox\" value=\"1\" disabled>";
+	  ?>    
+            </div></td>
+    <td valign="top">
+      <div align="center">
+        <?php
+    if($row[4]=="2")
+		echo "<input name=\"jadwal\" type=\"checkbox\" value=\"2\" checked disabled>";
+	  else
+		echo "<input name=\"jadwal\" type=\"checkbox\" value=\"2\" disabled>";
+	  ?> 
+      </div></td>
+  </tr>
+  
+  
+  <tr>
+    <td height="24">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td valign="top"><div align="center">2.</div></td>
+    <td colspan="6" valign="top"><div align="center">Modul</div></td>
+    <td valign="top"> 
+      <div align="center">
+        <?php
+	  if($row[5]=="1")
+		echo "<input name=\"jadwal\" type=\"checkbox\" value=\"1\" checked disabled>";
+	  else
+		echo "<input name=\"jadwal\" type=\"checkbox\" value=\"1\" disabled>";
+	  ?>    
+    </div></td>
+    <td valign="top">
+      <div align="center">
+        <?php
+    if($row[5]=="2")
+		echo "<input name=\"modul\" type=\"checkbox\" value=\"2\" checked disabled>";
+	 else
+	 echo "<input name=\"modul\" type=\"checkbox\" value=\"2\" disabled>";
+	 ?>
+     </div></td>
+  </tr>
+  
+  <tr>
+    <td height="23">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td valign="top"><div align="center">3.</div></td>
+    <td colspan="6" valign="top"><div align="center">Keperluan Peserta</div></td>
+    <td valign="top"> 
+      <div align="center">
+        <?php
+	  if($row[6]=="1")
+		echo "<input name=\"keperluan_peserta\" type=\"checkbox\" value=\"1\" checked disabled>";
+	  else
+		echo "<input name=\"keperluan_peserta\" type=\"checkbox\" value=\"1\" disabled>";
+	  ?>    
+     </div></td>
+    <td valign="top">
+      <div align="center">
+        <?php
+    if($row[6]=="2")
+		echo "<input name=\"keperluan_peserta\" type=\"checkbox\" value=\"2\" checked disabled>";
+	  else
+		echo "<input name=\"keperluan_peserta\" type=\"checkbox\" value=\"2\" disabled>";
+	  ?> 
+      </div></td>
+  </tr>
+  
+  <tr>
+    <td height="23">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td valign="top"><div align="center">4</div></td>
+    <td colspan="6" valign="top"><div align="center">Ruang</div></td>
+    <td valign="top"> 
+      <div align="center">
+        <?php
+	  if($row[7]=="1")
+		echo "<input name=\"ruang\" type=\"checkbox\" value=\"1\" checked disabled>";
+	  else
+		echo "<input name=\"ruang\" type=\"checkbox\" value=\"1\" disabled>";
+	  ?>    
+          </div></td>
+    <td valign="top">
+      <div align="center">
+        <?php
+    if($row[7]=="2")
+		echo "<input name=\"ruang\" type=\"checkbox\" value=\"2\" checked disabled>";
+	  else
+		echo "<input name=\"ruang\" type=\"checkbox\" value=\"2\" disabled>";
+	  ?>
+     </div></td>
+  </tr>
+  
+  <tr>
+    <td height="20">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td valign="top"><div align="center">5.</div></td>
+    <td colspan="6" valign="top"><div align="center">Instruktur</div></td>
+    <td valign="top"> 
+      <div align="center">
+        <?php
+	  if($row[8]=="1")
+		echo "<input name=\"instruktur\" type=\"checkbox\" value=\"1\" checked disabled>";
+	  else
+		echo "<input name=\"instruktur\" type=\"checkbox\" value=\"1\" disabled>";
+	  ?>    
+          </div></td>
+    <td valign="top">
+      <div align="center">
+        <?php
+    if($row[8]=="2")
+		echo "<input name=\"instruktur\" type=\"checkbox\" value=\"2\" checked disabled>";
+	  else
+		echo "<input name=\"instruktur\" type=\"checkbox\" value=\"2\" disabled>";
+	  ?>
+     </div></td>
+  </tr>
+  <tr>
+    <td height="54">&nbsp;</td>
+    <td></td>
+    <td>&nbsp;</td>
+    <td><input type="hidden" name="id" id="id" value="<?php echo $id ?>"/>
+      <br />
+      <input type="hidden" name="id" id="nama" value="<?php echo $nama ?>"/></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td height="24">&nbsp;</td>
+    <td></td>
+    <td colspan="2" valign="top"><input type="button" name="Submit" value="     Print     " id="tblprint" onClick="cetak()"></td>
+    <td>&nbsp;</td>
+    <td valign="top"><a href="edit_checklist.php?id_diklat=<?php echo $id_diklat; ?>&tahun=<?php echo $row[2]; ?>&bulan=<?php echo $row[1]; ?>&tanggal=<?php echo $row[0];?>&nama=<?php echo $nama_diklat ?>&unit=<?php echo $row[3]; ?>">edit</a></td>
+    <td colspan="2" valign="top">Hapus</td>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td height="130">&nbsp;</td>
+    <td></td>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</body>
+</html>
